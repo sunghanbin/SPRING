@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+				http://www.springframework.org/schema/beans/spring-beans.xsd
+				http://www.springframework.org/schema/context 
+ 				http://www.springframework.org/schema/context/spring-context.xsd">
+ 				<!-- @Autowirde 를 사용하기 위해서는 
+ 					http://www.springframework.org/schema/context 
+ 					http://www.springframework.org/schema/context/spring-context.xsd"
+ 					xmlns:context="http://www.springframework.org/schema/context"
+ 					스키마들을 추가 해 줘야 한다. -->
+				
+	<!-- @AutoWirde 사용을 위한 태그  -->
+	<context:annotation-config />
+	
+	<!-- 아래 처럼 주입하고자 하는 빈객체가 같은 클래스로 여러개 존재한다면
+		컴파일러가 어떤 빈객체를 주입 하는건지 몰라 Exception 을 만들어낸다.
+		이럴때 사용할수 있는 어노테이션이 @Qualifier 이다.
+		사용법
+		bean 태그 안에 qualifier 이란 태그를 달고
+		속성으로는 value 로 이름을 달아준다.
+		그렇게 되면 자바 파일에서는
+		@AutoWirde 
+		@Qualifier(밸류명)
+		이렇게 사용하게 되면 
+		컴파일러에서 밸류명을 찾아 가게 된다.
+		
+		-->
+		 			
+	<bean id="wordDao1" class="com.word.dao.WordDao">
+		<qualifier value= "usedDao"/>
+	</bean>
+	<bean id="wordDao2" class="com.word.dao.WordDao"/>
+	<bean id="wordDao3" class="com.word.dao.WordDao"/>
+	
+	<bean id="registerService" class="com.word.service.WordRegisterService">
+	<!-- Autowirde 할때는  constructor-arg ref 필요 없다.-->
+			<!-- <constructor-arg ref ="wordDao"/> -->
+	</bean>
+				
+	<bean id="searchService" class="com.word.service.WordSearchService">
+		<!-- <constructor-arg ref="wordDao"/> -->
+	</bean>			
+			
+</beans>
