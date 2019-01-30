@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+				http://www.springframework.org/schema/beans/spring-beans.xsd
+				http://www.springframework.org/schema/context 
+ 				http://www.springframework.org/schema/context/spring-context.xsd">
+ 				<!-- @Autowirde 를 사용하기 위해서는 
+ 					http://www.springframework.org/schema/context 
+ 					http://www.springframework.org/schema/context/spring-context.xsd"
+ 					xmlns:context="http://www.springframework.org/schema/context"
+ 					스키마들을 추가 해 줘야 한다. -->
+<context:annotation-config/>
+
+<bean id="bookDao" class="com.brms.book.dao.BookDao"/>
+<!-- 태그를 사용하여  생명주기 메서드를 사용할수도 있다. -->
+<bean id="bookRegisterService" class="com.brms.book.service.BookRegisterService"
+init-method="initmethod" destroy-method="destroyMethod"/>
+	<!-- 위처럼 init-method 와 destroy- meethod 태그를 사용하여 생명주기를 관리할수 있으며
+	명칭은 개발자가 정하는대로 사용가능 하다 . init-method="내마음"  
+	사용법은  생명주기 태그를 달아준 빈객체 클래스에서 내가 정한 메소드 이름으로 구현 가능하다.-->
+<bean id="bookSearchService" class="com.brms.book.service.BookSearchService"/>
+
+<bean id="memberDao" class="com.brms.member.dao.MemberDao"/>
+
+<bean id="memberRegisterService" class="com.brms.member.service.MemberRegisterService"/>
+
+<bean id="memberSearchService" class="com.brms.member.service.MemberSearchService"/>
+
+
+ 					
+
+
+ 					
+</beans>
